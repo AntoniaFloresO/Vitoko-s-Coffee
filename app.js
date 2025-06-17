@@ -17,12 +17,16 @@ app.get('/', (req, res) => {
   res.send("Welcome to Vitoko's Coffee shop");
 });
 
-app.use('/api/clientes', clienteRoutes);
-
 // Puerto
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
+
+// Manejo de errores de forma general
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ mensaje: 'Error interno del servidor' });
 });
 
 const cors = require('cors');

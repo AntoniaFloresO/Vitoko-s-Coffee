@@ -1,14 +1,17 @@
 const db = require('../database/db');
 
 const Trabajador = {
+    // Retorna todos los trabajadores
     getAll: (callback) => {
         db.query('SELECT * FROM trabajadores', callback);
     },
 
+    // Retorna un trabajador por su ID
     getById: (id, callback) => {
         db.query('SELECT * FROM trabajadores WHERE id_trabajador = ?', [id], callback);
     },
 
+    // Inserta un nuevo trabajador (por defecto el estado = 1)
     create: (trabajador, callback) => {
         const { nombre, cargo, estado } = trabajador;
         db.query(
@@ -18,6 +21,7 @@ const Trabajador = {
         );
     },
 
+    // Actualiza un trabajador existente
     update: (id, trabajador, callback) => {
         const { nombre, cargo, estado } = trabajador;
         db.query(
@@ -27,6 +31,7 @@ const Trabajador = {
         );
     },
 
+    // Desactiva un trabajador (estado = 0)
     delete: (id, callback) => {
         // Suponemos que "eliminar" significa desactivar (estado = 0)
         db.query('UPDATE trabajadores SET estado = 0 WHERE id_trabajador = ?', [id], callback);

@@ -1,6 +1,7 @@
 const Trabajador = require('../models/Trabajador');
 
 const trabajadorController = {
+    // Obtener todos los trabajadores 
     getAll: (req, res) => {
         Trabajador.getAll((err, results) => {
             if (err) return res.status(500).json({ error: err });
@@ -8,6 +9,7 @@ const trabajadorController = {
         });
     },
 
+    // Obtener un trabajador por ID
     getById: (req, res) => {
         const { id } = req.params;
         Trabajador.getById(id, (err, results) => {
@@ -17,6 +19,7 @@ const trabajadorController = {
         });
     },
 
+    // Crear nuevo trabajador
     create: (req, res) => {
         const trabajador = req.body;
         Trabajador.create(trabajador, (err, result) => {
@@ -25,6 +28,7 @@ const trabajadorController = {
         });
     },
 
+    // Actualizar datos de un trabajador existente
     update: (req, res) => {
         const { id } = req.params;
         const trabajador = req.body;
@@ -34,6 +38,8 @@ const trabajadorController = {
         });
     },
 
+    // Desactivar un trabajador (estado = 0)
+    // No se elimina solo se cambia el estado
     delete: (req, res) => {
         const { id } = req.params;
         Trabajador.delete(id, (err) => {

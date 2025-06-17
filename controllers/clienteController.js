@@ -1,6 +1,7 @@
 const Cliente = require('../models/Cliente');
 const db = require('../database/db');
 
+// Se obtine todos los clientes (normales y premium)
 exports.getClientes = (req, res) => {
   const tipo = req.query.type;
   Cliente.getAll(tipo, (err, data) => {
@@ -11,6 +12,7 @@ exports.getClientes = (req, res) => {
   });
 };
 
+// Se elimina/desactiva un cliente por su ID
 exports.desactivarCliente = (req, res) => {
   const id = req.params.id;
   Cliente.desactivar(id, (err, result) => {
@@ -25,6 +27,7 @@ exports.desactivarCliente = (req, res) => {
   });
 };
 
+// Se crea un nuevo cliente (normal o premium)
 exports.crearCliente = (req, res) => {
   const { nombre, ciudad, tipo } = req.body;
 

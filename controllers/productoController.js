@@ -1,5 +1,6 @@
 const Producto = require('../models/Producto');
 
+// Obtiene todos los productos activos = 1
 exports.listarProductos = (req, res) => {
   Producto.getAll((err, results) => {
     if (err) return res.status(500).json({ error: err.message });
@@ -7,6 +8,7 @@ exports.listarProductos = (req, res) => {
   });
 };
 
+// Crea un nuevo producto
 exports.crearProducto = (req, res) => {
   const { name, price, stock } = req.body;
 
@@ -25,6 +27,7 @@ exports.crearProducto = (req, res) => {
   });
 };
 
+// Actualiza el precio de un producto
 exports.actualizarPrecio = (req, res) => {
   const id = req.params.id;
   const { price } = req.body;
@@ -52,6 +55,7 @@ exports.actualizarPrecio = (req, res) => {
   });
 };
 
+// Incrementa el stock de un producto
 exports.incrementarStock = (req, res) => {
   const  id  = req.params.id;
   const { amount } = req.body;
@@ -74,6 +78,7 @@ exports.incrementarStock = (req, res) => {
   });
 };
 
+// Deshabilita un producto 
 exports.deshabilitarProducto = (req, res) => {
   const { id } = req.params;
 
@@ -83,7 +88,7 @@ exports.deshabilitarProducto = (req, res) => {
   });
 };
 
-// Vendidos esta semana
+// Total productos vendidos esta semana
 exports.obtenerVendidosEstaSemana = (req, res) => {
   const hoy = new Date();
   const primerDiaSemana = new Date(hoy.setDate(hoy.getDate() - hoy.getDay() + 1)); // Lunes
@@ -97,7 +102,7 @@ exports.obtenerVendidosEstaSemana = (req, res) => {
   });
 };
 
-// Vendidos año actual
+// Total productos vendidos en el año
 exports.obtenerVendidosAnioActual = (req, res) => {
   const fechaInicio = new Date(new Date().getFullYear(), 0, 1).toISOString().split('T')[0];
 
