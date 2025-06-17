@@ -60,21 +60,21 @@ exports.incrementarStock = (req, res) => {
   const  id  = req.params.id;
   const { amount } = req.body;
 
-  if (!price || isNaN(price)) {
-    return res.status(400).json({ error: 'Precio inválido' });
+  if (!amount || isNaN(amount)) {
+    return res.status(400).json({ error: 'Cantidad inválido' });
   }
 
-  Producto.updatePrecio(id, price, (err, result) => {
+  Producto.updateStock(id, amount, (err, result) => {
     if (err) {
       console.error(err);
-      return res.status(500).json({ error: err.message || 'Error al actualizar precio' });
+      return res.status(500).json({ error: err.message || 'Error al incrementar stock' });
     }
 
     if (result.affectedRows === 0) {
       return res.status(404).json({ error: 'Producto no encontrado' });
     }
 
-    res.json({ message: 'Precio actualizado correctamente' });
+    res.json({ message: 'Stock incrementado correctamente' });
   });
 };
 
